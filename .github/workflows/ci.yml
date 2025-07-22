@@ -27,6 +27,10 @@ jobs:
       # 4. Запускаем линтер
       - run: make lint
 
+        # Добавляем экшен от Hexlet
+      - name: Say hello from Hexlet
+        uses: hexlet-components/hello-from-hexlet-action@release
+
       # 5. Запускаем тесты
       - name: run tests
         run: make test
