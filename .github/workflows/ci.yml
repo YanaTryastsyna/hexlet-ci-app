@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Клонируем репозиторий
+      - uses: actions/checkout@v4
+
+      # 2. Устанавливаем Node.js (версия может отличаться, смотрите в package.json)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # 3. Устанавливаем зависимости
+      - run: make setup
+
+      # 4. Запускаем линтер
+      - run: make lint
+
+      # 5. Запускаем тесты
+      - name: run tests
+        run: make test
